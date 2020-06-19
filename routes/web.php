@@ -20,3 +20,15 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+
+Route::resource('board', 'BoardController', [
+    'only' => ['index', 'store', 'show', 'update', 'destroy']
+]);
+
+Route::resource('task', 'TaskController', [
+    'only' => ['index', 'store', 'show', 'update', 'destroy']
+]);
+
+Route::resource('list', 'ListController', [
+    'only' => ['index', 'store', 'show', 'update', 'destroy']
+]);
