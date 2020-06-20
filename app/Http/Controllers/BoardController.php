@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Board;
+use App\BoardList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CreateBoardRequest;
@@ -30,10 +31,21 @@ class BoardController extends Controller
      */
     public function store(CreateBoardRequest $request)
     {
+        $defaultLists = [['title' => 'To Do'], ['title' => 'Doing'], ['title' => 'Pending Confirmation']];
+        $lists = [];
+
         $board = Board::create([
             'title' => $request->title,
             'create_by' => Auth::id(),
         ]);
+
+        $board->users()->attach(Auth::id());
+
+        foreach ($defaultLists as $list) {
+            $lists[] = BoardList::make($list);
+        }
+
+        $board->lists()->saveMany($lists);
 
         return BoardResources::make($board);
     }

@@ -18,17 +18,21 @@ Route::get('/', function () {
 });
 
 Auth::routes(['verify' => true]);
+Route::group(['middleware'=>['verified']],function(){
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+	Route::get('/home', 'HomeController@index')->name('home');
+	Route::get('/dashboard', 'DashboardController@index');
+	Route::get('/myboard/{id}', 'MyBoardController@show');
 
-Route::resource('board', 'BoardController', [
+	Route::resource('board', 'BoardController', [
+    	'only' => ['index', 'store', 'show', 'update', 'destroy']
+	]);
+
+	Route::resource('task', 'TaskController', [
+    	'only' => ['index', 'store', 'show', 'update', 'destroy']
+	]);
+
+	Route::resource('list', 'ListController', [
     'only' => ['index', 'store', 'show', 'update', 'destroy']
-]);
-
-Route::resource('task', 'TaskController', [
-    'only' => ['index', 'store', 'show', 'update', 'destroy']
-]);
-
-Route::resource('list', 'ListController', [
-    'only' => ['index', 'store', 'show', 'update', 'destroy']
-]);
+	]);
+});

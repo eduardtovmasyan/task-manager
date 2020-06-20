@@ -1,4 +1,4 @@
-$(document).on('click', '.addCard', function() {
+$(document).on('click', '.addTask', function() {
     $(this).toggle()
     $(this).before(`
         <div>
@@ -32,18 +32,29 @@ $('.addListName').click(function(event) {
 
 $(document).on('click', '.addList', function() {
     let name = $(this).prev().children().val()
-    $(this).parent().parent().parent().parent().before(`
-        <div class="col">
-            <div class="card">
-                <div class="card-header">${name}</div>
-
+    let token = $('#token').val()
+    let boardId = $('.boardId').val()
+    let t = $(this)
+    $.ajax({
+        type: 'post',
+        url: '/list',
+        data: { 'title': name, 'board_id': boardId, '_token': token },
+        success: function(r) {
+            t.parent().parent().parent().parent().before(`
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">${name}</div>
                 <div class="card-body">
                  <button class="btn btn-primary btn-block fa fa-plus addCard" aria-hidden="true"> Add Card</button>
                 </div>
+                </div>
             </div>
-        </div>
         `)
-    $(this).closest('.card-body').empty().toggle()
+        t.closest('.card-body').empty().toggle()
+        }
+            
+    });
+    
 });
 
 $(document).on('click', '.listAddCancel', function() {

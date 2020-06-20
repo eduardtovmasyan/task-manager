@@ -26,23 +26,31 @@
 <!-- body -->
 @section('content')
 <div class="container">
+<input type="hidden" class="boardId" value="{{$thisBoard->id}}">
     <div class="row justify-content-left">
-@foreach ($boards as $board)
+
+        @foreach ($thisBoard->lists as $list)
         <div class="col">
             <div class="card">
-                <div class="card-header">
-                    {{$board->title}}
-                <button class="fa fa-minus-circle float-right deleteBoard" data-id="{{$board->board_id}}" aria-hidden="true"></button>
-                </div>
+                <div class="card-header">{{$list->title}}</div>
 
                 <div class="card-body">
-                   <a href="myboard/{{$board->board_id}}" class="btn btn-outline-info btn-sm" aria-hidden="true">Open Board</a>
-                   <button class="fa fa-user-plus float-right" aria-hidden="true"></button>
+                   <button class="btn btn-primary btn-block fa fa-plus addTask" aria-hidden="true"> Add Task</button>
                 </div>
             </div>
         </div>
-@endforeach
-<input type="hidden" id="boardCards">
+        @endforeach
+
+        <div class="col">
+            <div class="card">
+                <div class="card-header fa fa-plus addListName" aria-hidden="true"> Add New List</div>
+
+                <div class="card-body" style="display: none;">
+                  
+                </div>
+
+            </div>
+        </div>
     </div>
 </div>
 @endsection
@@ -50,5 +58,6 @@
 
 <!-- js -->
 @section('js')
+  <script type="text/javascript" src="{{asset('js/dashboard.js')}}"></script>
 @endsection
 <!-- end js -->
