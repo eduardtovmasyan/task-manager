@@ -20,19 +20,22 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 Route::group(['middleware'=>['verified']],function(){
 
-	Route::get('/home', 'HomeController@index')->name('home');
-	Route::get('/dashboard', 'DashboardController@index');
-	Route::get('/myboard/{id}', 'MyBoardController@show');
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/dashboard', 'DashboardController@index');
+    Route::get('/myboard/{id}', 'MyBoardController@show');
+    Route::get('/board/{boardId}/tasks', 'BoardTaskController@index');
+    Route::patch('/boards/{boardId}/tasks/{taskId}', 'BoardTaskController@update');
+    Route::get('/boards/{boardId}/tasks/{taskId}', 'BoardTaskController@update');
 
-	Route::resource('board', 'BoardController', [
-    	'only' => ['index', 'store', 'show', 'update', 'destroy']
-	]);
+    Route::resource('board', 'BoardController', [
+        'only' => ['index', 'store', 'show', 'update', 'destroy']
+    ]);
 
-	Route::resource('task', 'TaskController', [
-    	'only' => ['index', 'store', 'show', 'update', 'destroy']
-	]);
+    Route::resource('task', 'TaskController', [
+        'only' => ['index', 'store', 'show', 'update', 'destroy']
+    ]);
 
-	Route::resource('list', 'ListController', [
+    Route::resource('list', 'ListController', [
     'only' => ['index', 'store', 'show', 'update', 'destroy']
-	]);
+    ]);
 });

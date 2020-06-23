@@ -31,7 +31,11 @@ class BoardController extends Controller
      */
     public function store(CreateBoardRequest $request)
     {
-        $defaultLists = [['title' => 'To Do'], ['title' => 'Doing'], ['title' => 'Pending Confirmation']];
+        $defaultLists = [
+            ['title' => 'To Do'],
+            ['title' => 'Doing'],
+            ['title' => 'Pending Confirmation']
+        ];
         $lists = [];
 
         $board = Board::create([

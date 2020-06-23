@@ -18,46 +18,34 @@
 <!-- css -->
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{ asset('css/dashboard.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/task.css') }}">
 @endsection
 <!-- end css -->
 <!-- body -->
 @section('content')
-<div class="container">
-    <input type="hidden" class="boardId" value="{{$thisBoard->id}}">
-    <div class="row justify-content-left">
-        @foreach ($thisBoard->lists as $list)
-        <div class="col">
-            <div class="card">
-                <div class="card-header">{{$list->title}}</div>
-                <div class="card-body" data-id="{{$list->id}}">
-                    <button class="btn btn-primary btn-block fa fa-plus addTask" aria-hidden="true"> Add Task</button>
-                </div>
-            </div>
-        </div>
-        @endforeach
-
-<!--  -->
-<div id="boardUsers">
-        @foreach ($thisBoard->users as $user)
-        <input type="hidden" class="thisBoardUser " data-id="{{$user->name}}" value="{{$user->id}}">
-        @endforeach
-</div>
-<!--  -->
-
-        <div class="col">
-            <div class="card">
-                <div class="card-header fa fa-plus addListName" aria-hidden="true"> Add New List</div>
-                <div class="card-body" style="display: none;">
-                    
-                </div>
-            </div>
-        </div>
+<div id="main" class="pb-3">
+    @foreach ($thisBoard->lists as $list)
+    <div class="list" data-id="{{ $list->id }}">
+        <div class="title removable listName" data-id="{{$list->id}}">{{$list->title}} <span class="foat-right listDelete" data-id="{{$list->id}}" >x</span></div>
+        <div class="content"></div>
+        <div class="add-card editable">Add another card</div>
     </div>
+    @endforeach
+    <div class="add-list">
+        <div class="title editable">Add another list</div>
+    </div>
+</div>
+<input type="hidden" id="current-board-id" value="{{$thisBoard->id}}">
+<div class="modal" id="mytasks"></div>
+<div id="boardUsers">
+    @foreach ($thisBoard->users as $user)
+    <input type="hidden" class="thisBoardUser " data-id="{{$user->name}}" value="{{$user->id}}">
+    @endforeach
 </div>
 @endsection
 <!-- end body -->
 <!-- js -->
 @section('js')
-<script type="text/javascript" src="{{asset('js/dashboard.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/task.js')}}"></script>
 @endsection
 <!-- end js -->

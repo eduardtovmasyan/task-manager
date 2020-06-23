@@ -25,4 +25,14 @@ class Board extends Model
     {
         return $this->hasMany(BoardList::class);
     }
+
+    public function tasks()
+    {
+        return $this->hasManyThrough(
+            Task::class,
+            BoardList::class,
+            'board_id',
+            'list_id'
+        );
+    }
 }

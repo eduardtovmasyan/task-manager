@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
-class CreateTaskRequest extends Request
+class UpdateTaskRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.
@@ -15,10 +15,10 @@ class CreateTaskRequest extends Request
     public function rules()
     {
         return [
-            'title' => 'required|string|max:255',
+            'title' => 'string|max:255',
             'desc' => 'nullable|string|max:65000',
             'list_id' => [
-                'required', Rule::exists('lists', 'id')->whereIn(
+                Rule::exists('lists', 'id')->whereIn(
                     'board_id', $this->getAuthUserBoardIds()
                 )
             ],

@@ -1,18 +1,18 @@
 $(document).on('click', '.addBoard', function() {
-	var token = $('#token').val()
-	let boardName = $('.boardName').val()
+    var token = $('#token').val()
+    let boardName = $('.boardName').val()
 
-	$.ajax({
+    $.ajax({
         type: 'post',
         url: '/board',
         data: { 'title': boardName, '_token': token },
         success: function(r) {
             console.log(r)
-        	$('#boardHr').before(`
-    			<button class="dropdown-item" type="button">
-    				${boardName}
-    			</button>
-    		`)
+            $('#boardHr').before(`
+                <button class="dropdown-item" type="button">
+                    ${boardName}
+                </button>
+            `)
             $('#boardCards').after(`
                 <div class="col">
                     <div class="card">
@@ -40,18 +40,30 @@ $(document).on('click', '.addBoard', function() {
 });
 
 $(document).on('click', '.deleteBoard', function() {
-    var token = $('#token').val()
-    let boardId = $(this).attr('data-id')
-    let t = $(this)
-    $.ajax({
-        type: 'delete',
-        url: '/board/' + boardId,
-        data: { '_token': token },
-        success: function(r) {
-            t.parent().parent().parent().parent().parent().remove()
-            $('#board-'+ boardId).remove()
-        }
-    });
+    swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+
+                var token = $('#token').val()
+                let boardId = $(this).attr('data-id')
+                let t = $(this)
+                $.ajax({
+                    type: 'delete',
+                    url: '/board/' + boardId,
+                    data: { '_token': token },
+                    success: function(r) {
+                        t.parent().parent().parent().parent().parent().remove()
+                        $('#board-' + boardId).remove()
+                    }
+                });
+            } 
+        });
 });
 
 $(document).on('click', '.renameBoard', function() {
@@ -78,8 +90,7 @@ $(document).on('click', '.updateBoard', function() {
         data: { '_token': token, 'title': content },
         success: function(r) {
             t.parent().parent().parent().empty().html(content)
-            $('#board-'+ boardId).empty().html(content)
+            $('#board-' + boardId).empty().html(content)
         }
     });
 });
-

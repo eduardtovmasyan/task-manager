@@ -23,15 +23,14 @@
 <!-- body -->
 @section('content')
 <div class="container">
-    <div class="row justify-content-left">
+    <div class="row ">
         @foreach ($boards as $board)
-        <div class="col">
+        <div class="col-md-4 mt-5">
             <div class="card">
                 <div class="card-header">
                     <strong> {{$board->title}} </strong>
                     <div class="dropdown float-right">
                         <button type="button" class="fa fa-ellipsis-h boardButton" aria-hidden="true" data-toggle="dropdown">
-                        
                         </button>
                         <div class="dropdown-menu">
                             <button class="dropdown-item fa fa-pencil-square-o boardButton renameBoard" data-id="{{$board->board_id}}" aria-hidden="true"> Rename</button>
