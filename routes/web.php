@@ -20,7 +20,6 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 Route::group(['middleware'=>['verified']],function(){
 
-    Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/dashboard', 'DashboardController@index');
     Route::get('/myboard/{id}', 'MyBoardController@show');
     Route::get('/board/{boardId}/tasks', 'BoardTaskController@index');

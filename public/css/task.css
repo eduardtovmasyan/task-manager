@@ -100,3 +100,11 @@ div {
 .content {
     min-height: 40px;
 }
+.deleteTask {
+    color: red;
+    border: none;
+    background: none;
+}
+.assigneSelect {
+    padding: 7px;
+}

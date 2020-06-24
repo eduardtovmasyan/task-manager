@@ -49,7 +49,6 @@ $(document).on('click', '.deleteBoard', function() {
         })
         .then((willDelete) => {
             if (willDelete) {
-
                 var token = $('#token').val()
                 let boardId = $(this).attr('data-id')
                 let t = $(this)
