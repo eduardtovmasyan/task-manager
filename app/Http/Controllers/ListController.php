@@ -76,6 +76,9 @@ class ListController extends Controller
      */
     public function destroy($id)
     {
+        
+        $list = BoardList::findOrFail($id);
+        $list->tasks()->delete();
         BoardList::whereId($id)->delete();
     }
 }

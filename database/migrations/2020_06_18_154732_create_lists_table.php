@@ -19,6 +19,7 @@ class CreateListsTable extends Migration
             $table->unsignedBigInteger('board_id');
             $table->foreign('board_id')->references('id')->on('boards')->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

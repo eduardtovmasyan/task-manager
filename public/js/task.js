@@ -106,7 +106,7 @@ $(document).on('click', '.add-card', function() {
         url: '/task',
         data: { '_token': token, title, list_id },
         success: function(r) {
-            var taskElm = `<div class="card removable editable" data-id="${ r.data.id }">${ r.data.title }</div>`
+            var taskElm = `<div class="card removable editable" data-toggle="modal" data-id="${ r.data.id }">${ r.data.title }</div>`
             $(`.list[data-id="${ r.data.list_id }"] .content`).append(taskElm);
         }
     });
