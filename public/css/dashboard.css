@@ -1,0 +1,14 @@
+.cardAddCancel, .listAddCancel, .boardButton{
+    border: none;
+    width: 40px;
+    height: 35px;
+    background: none;
+    color: grey;
+    font-size: 25px;
+}
+
+.addListName  {
+    cursor: pointer;
+    color: grey;
+}
+
