@@ -77,15 +77,4 @@ class BoardTaskController extends Controller
         
         return TaskResource::make($task);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($boardId, $taskId)
-    {
-        //
-    }
 }

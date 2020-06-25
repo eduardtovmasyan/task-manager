@@ -25,6 +25,7 @@ Route::group(['middleware'=>['verified']],function(){
     Route::get('/board/{boardId}/tasks', 'BoardTaskController@index');
     Route::patch('/boards/{boardId}/tasks/{taskId}', 'BoardTaskController@update');
     Route::get('/boards/{boardId}/tasks/{taskId}', 'BoardTaskController@update');
+    Route::post('/boards/{boardId}/invitation', 'BoardInvitationController@store');
 
     Route::resource('board', 'BoardController', [
         'only' => ['index', 'store', 'show', 'update', 'destroy']
@@ -35,6 +36,10 @@ Route::group(['middleware'=>['verified']],function(){
     ]);
 
     Route::resource('list', 'ListController', [
+    'only' => ['index', 'store', 'show', 'update', 'destroy']
+    ]);
+
+    Route::resource('invites', 'BoardInvitationController', [
     'only' => ['index', 'store', 'show', 'update', 'destroy']
     ]);
 });

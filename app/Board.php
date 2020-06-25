@@ -26,6 +26,11 @@ class Board extends Model
         return $this->hasMany(BoardList::class);
     }
 
+    public function invitations()
+    {
+        return $this->hasMany(Invitation::class);
+    }
+
     public function tasks()
     {
         return $this->hasManyThrough(

@@ -29,6 +29,7 @@
             <div class="card">
                 <div class="card-header">
                     <strong> {{$board->title}} </strong>
+                    @if($board->create_by == Auth::id())
                     <div class="dropdown float-right">
                         <button type="button" class="fa fa-ellipsis-h boardButton" aria-hidden="true" data-toggle="dropdown">
                         </button>
@@ -37,10 +38,11 @@
                             <button class="dropdown-item fa fa-minus-circle boardButton deleteBoard" data-id="{{$board->board_id}}" aria-hidden="true"> Delete</button>
                         </div>
                     </div>
+                    @endif
                 </div>
                 <div class="card-body">
                     <a href="myboard/{{$board->board_id}}" class="btn btn-outline-info btn-sm" aria-hidden="true">Open Board</a>
-                    <button class="fa fa-user-plus boardButton float-right" aria-hidden="true"></button>
+                    <button class="fa fa-user-plus boardButton float-right invitation" aria-hidden="true" data-id="{{$board->board_id}}"></button>
                 </div>
             </div>
         </div>

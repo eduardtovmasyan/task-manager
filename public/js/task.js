@@ -55,21 +55,21 @@ $(document).on('click', '.add-list', function() {
     var result = prompt('Enter a title for this list.');
     var t = $(this)
     if (result) {
-    $.ajax({
-        type: 'post',
-        url: '/list',
-        data: { 'title': result, 'board_id': boardId, '_token': token },
-        success: function(r) {
-            t.before(`
+        $.ajax({
+            type: 'post',
+            url: '/list',
+            data: { 'title': result, 'board_id': boardId, '_token': token },
+            success: function(r) {
+                t.before(`
               <div class="list" data-id="${ r.data.id }">
                 <div class="title removable listName" data-id="${ r.data.id }">${ r.data.title } <span class="foat-right listDelete" data-id="${ r.data.id }" >x</span></div>
                 <div class="content"></div>
                 <div class="add-card editable">Add another card</div>
               </div>
             `)
-            initContent();
-        }
-    });
+                initContent();
+            }
+        });
     }
 });
 $(document).on('click', '.listDelete', function() {
@@ -101,16 +101,16 @@ $(document).on('click', '.add-card', function() {
     var title = prompt('Enter a title for this task.');
     var t = $(this)
     if (title) {
-    $.ajax({
-        type: 'post',
-        url: '/task',
-        data: { '_token': token, title, list_id },
-        success: function(r) {
-            var taskElm = `<div class="card removable editable" data-toggle="modal" data-id="${ r.data.id }">${ r.data.title }</div>`
-            $(`.list[data-id="${ r.data.list_id }"] .content`).append(taskElm);
-        }
-    });
-}
+        $.ajax({
+            type: 'post',
+            url: '/task',
+            data: { '_token': token, title, list_id },
+            success: function(r) {
+                var taskElm = `<div class="card removable editable" data-toggle="modal" data-id="${ r.data.id }">${ r.data.title }</div>`
+                $(`.list[data-id="${ r.data.list_id }"] .content`).append(taskElm);
+            }
+        });
+    }
 });
 
 $(document).on('click', '.card', function() {
@@ -163,7 +163,6 @@ $(document).on('click', '.card', function() {
                     <!-- Modal body -->
                     <div class="modal-body">
                     <div>${ assignee }</div>
-                        
                         <div class="my-5"></div>
                         <div class="form-group px-2 py-2 text-center newDesc" role="button" style="background:#dfe1e6;">
                         ${ desc }

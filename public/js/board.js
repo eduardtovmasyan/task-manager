@@ -61,7 +61,7 @@ $(document).on('click', '.deleteBoard', function() {
                         $('#board-' + boardId).remove()
                     }
                 });
-            } 
+            }
         });
 });
 
@@ -92,4 +92,21 @@ $(document).on('click', '.updateBoard', function() {
             $('#board-' + boardId).empty().html(content)
         }
     });
+});
+
+$(document).on('click', '.invitation', function() {
+    var token = $('#token').val();
+    var email = prompt('Enter email.');
+    var boardId = $(this).data('id')
+
+    if (email) {
+        $.ajax({
+            type: 'post',
+            url: `/boards/${boardId}/invitation`,
+            data: { 'email': email, '_token': token },
+            success: function(r) {
+                swal("Good job!", "You already sent invitation!", "success");
+            }
+        });
+    }
 });

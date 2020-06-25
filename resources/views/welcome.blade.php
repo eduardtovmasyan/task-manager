@@ -83,7 +83,6 @@
                 <div class="title m-b-md">
                     Task Manager
                 </div>
-
             </div>
         </div>
     </body>
